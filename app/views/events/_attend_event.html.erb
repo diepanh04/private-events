@@ -1,0 +1,6 @@
+<%= form_with(model: @event, method: "put") do |form| %>
+    <%= form.hidden_field :attendee_id, value: current_user.id %>
+    <%= form.hidden_field :attended_event_id, value: @event.id %>
+    <%= form.submit "Attend Event", class: "btn btn-dark" %>
+<% end %>
+

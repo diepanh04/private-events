@@ -1,0 +1,37 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="container" style="--bs-bg-opacity: .25; 
+      line-height: 10px; padding: 70px; margin-top: 50px;
+      background-color: lightblue; ">
+
+  <div style = "width: 50%; display: flex; justify-content: space-between" >
+    <%= link_to "Back", events_path, class:"btn btn-dark"%>
+    <% if user_signed_in? %>
+      <% if current_user == @creator %>
+        <%= link_to "Edit", edit_event_path(@event), class: "btn btn-secondary" %>
+        <%= button_to "Delete", @event, method: :delete, class:"btn btn-dark"%>
+      <% end %>
+      <% unless @event.attendees.include?(current_user) %>
+          <%= render "/events/attend_event" %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div style="padding:20px;">
+    <h1><%= @event.name %></h1>
+    <p><%= "Date: #{@event.date}" %></p>
+    <p><%= "Location: #{@event.location}" %></p>
+  </div>
+
+  <div>
+      People attending this event: <br>
+      <% @event.attendees.each do |a| %>
+        <%= a.email %><br>
+      <% end %>
+  </div>
+
+</div>
+
+
+
+
